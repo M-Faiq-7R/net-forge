@@ -11,6 +11,9 @@ void draw_line(int i=1){
 
 
 int main() {
+    int backlogs = 5; // For listening TCP connections. It is no. of devices which can wait in qeue before forming a connection.
+
+
     draw_line();
     std::cout << "Netforge Initiated ... \nServer waiting for connections ..." << std::endl;
     draw_line(2);
@@ -31,11 +34,17 @@ int main() {
               << "Socket address :: " << server_address.sin_addr.s_addr << std::endl;
 
     // Binding the socket
-    int x = bind(server_socket, (struct sockaddr*)&server_address , sizeof(server_address));
-    if (x==0){
+    if (bind(server_socket, (struct sockaddr*)&server_address , sizeof(server_address))==0){
         std::cout << "Bind Created Successfully." << std::endl;
     }else{
         std::cout << "Failed to create Bind." << std::endl;
+    }
+
+    // Listening for TCP connections
+    if(listen(server_socket , backlogs) == 0){
+        std::cout << "Server listening ..." << std::endl;
+    }else{
+        std::cout << "Server Failed to listen ... " << std::endl;
     }
 
 
