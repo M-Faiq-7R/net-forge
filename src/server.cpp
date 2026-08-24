@@ -10,7 +10,7 @@ int main() {
 
 
     draw_line();
-    std::cout << "Netforge Initiated ... \nServer waiting for connections ..." << std::endl;
+    std::cout << "Netforge Initiating ... \n" << std::endl;
     draw_line(2);
 
     // Creating a socket
