@@ -25,10 +25,18 @@ int main() {
     server_address.sin_port = htons(8080);
     server_address.sin_addr.s_addr = INADDR_ANY ;
 
-    std::cout << "Socket info :: " << std::endl;
+    std::cout << "Socket info := " << std::endl;
     std::cout << "Socket family :: " << server_address.sin_family << std::endl;
     std::cout << "Socket port :: " << server_address.sin_port << std::endl      
               << "Socket address :: " << server_address.sin_addr.s_addr << std::endl;
+
+    // Binding the socket
+    int x = bind(server_socket, (struct sockaddr*)&server_address , sizeof(server_address));
+    if (x==0){
+        std::cout << "Bind Created Successfully." << std::endl;
+    }else{
+        std::cout << "Failed to create Bind." << std::endl;
+    }
 
 
     draw_line(2);         
