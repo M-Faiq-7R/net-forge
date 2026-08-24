@@ -1,12 +1,7 @@
 #include <iostream>
 #include <sys/socket.h>
 #include <netinet/in.h>
-
-void draw_line(int i=1){
-    for(int j =0; j<i; j++){
-        std::cout << "===================================================================" << std::endl;
-    }
-}
+#include "utils.h"
 
 
 
