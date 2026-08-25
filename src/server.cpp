@@ -2,6 +2,8 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include "utils.h"
+#include <cerrno>
+#include <cstring>
 
 
 
@@ -33,13 +35,17 @@ int main() {
         std::cout << "Bind Created Successfully." << std::endl;
     }else{
         std::cout << "Failed to create Bind." << std::endl;
+        std::cout << "Error : " << strerror(errno) << std::endl;
+        return 0;
     }
 
+    draw_line();
     // Listening for TCP connections
     if(listen(server_socket , backlogs) == 0){                                       // Listen doesn't actually communicates with client , instead it just waits for user request to form connection , we use accept() to form connection with client-server.
         std::cout << "Server listening ..." << std::endl;
     }else{
         std::cout << "Server Failed to listen ... " << std::endl;
+        
     }
 
     // Accepting Clients TCP connection request
@@ -47,6 +53,12 @@ int main() {
     socklen_t client_address_length = sizeof(client_address);
     int client_socket =  accept(server_socket , (struct sockaddr*)&client_address , &client_address_length);  // Parameters of accept are : (server_socket, client_address, client_address_length)
     std::cout << "Connection Accepted! " << std::endl;
+
+    draw_line();
+
+    // Sending message to client
+    std::string message = "Hello Client!";
+    send(server_socket , message.c_str() , message.size() , 0);
 
     draw_line(2);         
     return 0;
