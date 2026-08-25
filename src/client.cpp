@@ -10,8 +10,14 @@ int main(){
     std::string ip_addr = "127.0.0.1";  // IPv4 to which client will connect
 
     int client_socket = socket(AF_INET , SOCK_STREAM, 0);
-    std::cout << "Client socket created Successfully ..." << std::endl;
-
+    if (client_socket < 0){
+        std::cout << "Failed to create Client Socket. " << std::endl;
+        std::cout << "Error : " << strerror(errno) << std::endl;
+        return 0;
+    }else{
+        std::cout << "Client socket created Successfully ..." << std::endl;
+    }
+    
     // Assigning addrs to clients socket
     sockaddr_in server_address ;
     server_address.sin_family = AF_INET;
@@ -23,19 +29,25 @@ int main(){
     // Connecting with the server
     int connection_status = connect(client_socket , (struct sockaddr*)&server_address , sizeof(server_address) );
     if (connection_status == 0){
-        std::cout << "Connected to Server!" << std::endl;
-        
-        
+        std::cout << "Connected to Server!" << std::endl; 
     }else{
         std::cout << "Failed to connect to server!" << std::endl;
         std::cout << "Error : " << strerror(errno) << std::endl;
+        return 0;
     }
 
     // Receiving message from server
     char message[1024];
     int byte_received = recv(client_socket, message , sizeof(message) -1 , 0);
-    message[byte_received] = '\0';
-    std::cout << "Server : " << message << std::endl;
+    if (byte_received > 0){
+        message[byte_received] = '\0';
+        std::cout << "Server : " << message << std::endl;
+    }else if(byte_received == 0){
+        std::cout << "Server closed its connection." << std::endl;
+    }else{
+        std::cout << "Error : " << strerror(errno) << std::endl;
+        return 0;
+    }
 
     return 0;
 }
