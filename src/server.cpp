@@ -58,7 +58,9 @@ int main() {
 
     // Sending message to client
     std::string message = "Hello Client!";
-    send(server_socket , message.c_str() , message.size() , 0);
+    send(client_socket , message.c_str() , message.size() , 0);
+
+    std::cout << "message Sent!" <<  std::endl;
 
     draw_line(2);         
     return 0;
