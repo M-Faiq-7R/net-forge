@@ -37,17 +37,25 @@ int main(){
     }
 
     // Receiving message from server
-    char message[1024];
-    int byte_received = recv(client_socket, message , sizeof(message) -1 , 0);
+    char s_message[1024];
+    int byte_received = recv(client_socket, s_message , sizeof(s_message) -1 , 0);
     if (byte_received > 0){
-        message[byte_received] = '\0';
-        std::cout << "Server : " << message << std::endl;
+        s_message[byte_received] = '\0';
+        std::cout << "Server : " << s_message << std::endl;
     }else if(byte_received == 0){
         std::cout << "Server closed its connection." << std::endl;
     }else{
         std::cout << "Error : " << strerror(errno) << std::endl;
         return 0;
     }
+    
+
+
+    // Sending message back to server
+    std::string c_message = "Hello Server!";
+    send( client_socket , c_message.c_str() , c_message.size() , 0);
+    std::cout << "message Sent!" <<  std::endl;
+
 
     return 0;
 }
