@@ -35,7 +35,7 @@ NetForge is currently in its early development stage. Features will be added inc
 
 The exact feature set will evolve during development, but the project may eventually include:
 
-* [ ] Basic TCP client
+* ✅ Basic TCP client
 * ✅ Basic TCP server
 * [ ] UDP communication
 * [ ] IP and port handling
@@ -51,13 +51,19 @@ The exact feature set will evolve during development, but the project may eventu
 Compile the project using `g++`:
 
 ```bash
-g++ main.cpp -o netforge
+g++ src/server.cpp src/utils.cpp -o server
+```
+```bash
+g++ src/client.cpp -o client
 ```
 
 Run it with:
 
 ```bash
-./netforge
+./server
+```
+```bash
+./client
 ```
 
 ## Philosophy
