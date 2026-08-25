@@ -53,7 +53,7 @@ int main(){
 
     // Sending message back to server
     std::string c_message = "Hello Server!";
-    send( client_socket , c_message.c_str() , c_message.size() , 0);
+    send(client_socket , c_message.c_str() , c_message.size() , 0);
     std::cout << "message Sent!" <<  std::endl;
 
 
