@@ -62,19 +62,23 @@ int main() {
     // std::cout << "Message Sent!" <<  std::endl;
 
     // Recieving message from client
-    char c_message[1024];
-    int byte_received = recv(client_socket, c_message , sizeof(c_message) -1 , 0);
-    if (byte_received > 0){
-        c_message[byte_received] = '\0';
-        std::cout << "Client : " << c_message << std::endl;
-        std::string message = "Message Recieved by Server!";
-        send(client_socket , message.c_str() , message.size() , 0);
-
-    }else if(byte_received == 0){
-        std::cout << "Client closed its connection." << std::endl;
-    }else{
-        std::cout << "Error : " << strerror(errno) << std::endl;
-        return 0;
+    while (true){
+        char c_message[1024];
+        int byte_received = recv(client_socket, c_message , sizeof(c_message) -1 , 0);
+        if (byte_received > 0){
+            c_message[byte_received] = '\0';
+            std::cout << "Client : " << c_message << std::endl;
+            std::string message = "Message Recieved by Server!";
+            send(client_socket , message.c_str() , message.size() , 0);
+        }
+        else if(byte_received == 0){
+            std::cout << "Client closed its connection." << std::endl;
+            break;
+        }
+        else{
+            std::cout << "Error : " << strerror(errno) << std::endl;
+            break;
+        }
     }
 
     draw_line(2);         
