@@ -56,8 +56,12 @@ int main(){
         if (c_message == "quit"){
             std::cout << "Exiting this application" << std::endl;
             break;
+        }else{
+            if(send(client_socket , c_message.c_str() , c_message.size() , 0) == -1){
+                std::cout << "Failed to send message to server " << std::endl;
+                break;
+            }
         }
-        send(client_socket , c_message.c_str() , c_message.size() , 0);
 
         char confirmation_message[1024];
         int byte_received_r = recv(client_socket, confirmation_message , sizeof(confirmation_message) -1 , 0);

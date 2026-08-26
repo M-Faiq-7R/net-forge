@@ -52,14 +52,20 @@ int main() {
     sockaddr_in client_address;
     socklen_t client_address_length = sizeof(client_address);
     int client_socket =  accept(server_socket , (struct sockaddr*)&client_address , &client_address_length);  // Parameters of accept are : (server_socket, client_address, client_address_length)
-    std::cout << "Connection Accepted! " << std::endl;
-
+    if (client_socket == -1){
+        std::cout << "Failed to connect to client " << std::endl;
+        return 0;
+    }else{
+        std::cout << "Connection Accepted! " << std::endl;
+    }
     draw_line();
 
     // Sending message to client
     std::string message = "Hello Client! ";
-    send(client_socket , message.c_str() , message.size() , 0);
-    // std::cout << "Message Sent!" <<  std::endl;
+    if(send(client_socket , message.c_str() , message.size() , 0) == -1){
+        std::cout << "Failed to send message" << std::endl;
+    }
+    
 
     // Recieving message from client
     while (true){
@@ -69,7 +75,10 @@ int main() {
             c_message[byte_received] = '\0';
             std::cout << "Client : " << c_message << std::endl;
             std::string message = "Message Recieved by Server!";
-            send(client_socket , message.c_str() , message.size() , 0);
+            if (send(client_socket , message.c_str() , message.size() , 0) == -1){
+                std::cout << "Failed to send message" << std::endl;
+                break;
+            }
         }
         else if(byte_received == 0){
             std::cout << "Client closed its connection." << std::endl;
