@@ -58,7 +58,6 @@ int main() {
 
     // Sending message to client
     std::string message = "Hello Client! ";
-    
     send(client_socket , message.c_str() , message.size() , 0);
     // std::cout << "Message Sent!" <<  std::endl;
 
@@ -68,6 +67,9 @@ int main() {
     if (byte_received > 0){
         c_message[byte_received] = '\0';
         std::cout << "Client : " << c_message << std::endl;
+        std::string message = "Message Recieved by Server!";
+        send(client_socket , message.c_str() , message.size() , 0);
+
     }else if(byte_received == 0){
         std::cout << "Client closed its connection." << std::endl;
     }else{

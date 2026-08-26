@@ -51,10 +51,19 @@ int main(){
     
     // Sending message back to server
     std::string c_message;
-    
     std::getline(std::cin , c_message);
     send(client_socket , c_message.c_str() , c_message.size() , 0);
-    std::cout << "message Sent!" <<  std::endl;
+    char confirmation_message[1024];
+    int byte_received_r = recv(client_socket, confirmation_message , sizeof(confirmation_message) -1 , 0);
+    if (byte_received_r > 0){
+        s_message[byte_received_r] = '\0';
+        std::cout << "Server : " << confirmation_message << std::endl;
+    }else if(byte_received_r == 0){
+        std::cout << "Server closed its connection." << std::endl;
+    }else{
+        std::cout << "Error : " << strerror(errno) << std::endl;
+        return 0;
+    }
 
     return 0;
 }
