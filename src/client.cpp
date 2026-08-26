@@ -49,13 +49,12 @@ int main(){
         return 0;
     }
     
-
-
     // Sending message back to server
-    std::string c_message = "Hello Server!";
+    std::string c_message;
+    
+    std::getline(std::cin , c_message);
     send(client_socket , c_message.c_str() , c_message.size() , 0);
     std::cout << "message Sent!" <<  std::endl;
-
 
     return 0;
 }
