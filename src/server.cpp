@@ -39,54 +39,56 @@ int main() {
         return 0;
     }
 
-    draw_line();
-    // Listening for TCP connections
-    if(listen(server_socket , backlogs) == 0){                                       // Listen doesn't actually communicates with client , instead it just waits for user request to form connection , we use accept() to form connection with client-server.
-        std::cout << "Server listening ..." << std::endl;
-    }else{
-        std::cout << "Server Failed to listen ... " << std::endl;
-        
-    }
-
-    // Accepting Clients TCP connection request
-    sockaddr_in client_address;
-    socklen_t client_address_length = sizeof(client_address);
-    int client_socket =  accept(server_socket , (struct sockaddr*)&client_address , &client_address_length);  // Parameters of accept are : (server_socket, client_address, client_address_length)
-    if (client_socket == -1){
-        std::cout << "Failed to connect to client " << std::endl;
-        return 0;
-    }else{
-        std::cout << "Connection Accepted! " << std::endl;
-    }
-    draw_line();
-
-    // Sending message to client
-    std::string message = "Hello Client! ";
-    if(send(client_socket , message.c_str() , message.size() , 0) == -1){
-        std::cout << "Failed to send message" << std::endl;
-    }
-    
-
-    // Recieving message from client
     while (true){
-        char c_message[1024];
-        int byte_received = recv(client_socket, c_message , sizeof(c_message) -1 , 0);
-        if (byte_received > 0){
-            c_message[byte_received] = '\0';
-            std::cout << "Client : " << c_message << std::endl;
-            std::string message = "Message Recieved by Server!";
-            if (send(client_socket , message.c_str() , message.size() , 0) == -1){
-                std::cout << "Failed to send message" << std::endl;
+        draw_line();
+        // Listening for TCP connections
+        if(listen(server_socket , backlogs) == 0){                                       // Listen doesn't actually communicates with client , instead it just waits for user request to form connection , we use accept() to form connection with client-server.
+            std::cout << "Server listening ..." << std::endl;
+        }else{
+            std::cout << "Server Failed to listen ... " << std::endl;
+            
+        }
+
+        // Accepting Clients TCP connection request
+        sockaddr_in client_address;
+        socklen_t client_address_length = sizeof(client_address);
+        int client_socket =  accept(server_socket , (struct sockaddr*)&client_address , &client_address_length);  // Parameters of accept are : (server_socket, client_address, client_address_length)
+        if (client_socket == -1){
+            std::cout << "Failed to connect to client " << std::endl;
+            return 0;
+        }else{
+            std::cout << "Connection Accepted! " << std::endl;
+        }
+        draw_line();
+
+        // Sending message to client
+        std::string message = "Hello Client! ";
+        if(send(client_socket , message.c_str() , message.size() , 0) == -1){
+            std::cout << "Failed to send message" << std::endl;
+        }
+        
+
+        // Recieving message from client
+        while (true){
+            char c_message[1024];
+            int byte_received = recv(client_socket, c_message , sizeof(c_message) -1 , 0);
+            if (byte_received > 0){
+                c_message[byte_received] = '\0';
+                std::cout << "Client : " << c_message << std::endl;
+                std::string message = "Message Recieved by Server!";
+                if (send(client_socket , message.c_str() , message.size() , 0) == -1){
+                    std::cout << "Failed to send message" << std::endl;
+                    break;
+                }
+            }
+            else if(byte_received == 0){
+                std::cout << "Client closed its connection." << std::endl;
                 break;
             }
-        }
-        else if(byte_received == 0){
-            std::cout << "Client closed its connection." << std::endl;
-            break;
-        }
-        else{
-            std::cout << "Error : " << strerror(errno) << std::endl;
-            break;
+            else{
+                std::cout << "Error : " << strerror(errno) << std::endl;
+                break;
+            }
         }
     }
 
