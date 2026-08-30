@@ -6,3 +6,9 @@ void draw_line(int i){
         std::cout << "===================================================================" << std::endl;
     }
 }
+
+void draw_x_line(int i){
+    for(int j =0; j<i; j++){
+        std::cout << "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" << std::endl;
+    }
+}
