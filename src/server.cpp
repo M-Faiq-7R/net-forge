@@ -42,15 +42,17 @@ int main(){
         return 0;
     }
 
-    while (true){
-        draw_line();
-        // Listening for TCP connections
-        if(listen(server_socket , backlogs) == 0){                                       // Listen doesn't actually communicates with client , instead it just waits for user request to form connection , we use accept() to form connection with client-server.
+    if(listen(server_socket , backlogs) == 0){                                       // Listen doesn't actually communicates with client , instead it just waits for user request to form connection , we use accept() to form connection with client-server.
             std::cout << "Server listening ..." << std::endl;
         }else{
             std::cout << "Server Failed to listen ... " << std::endl;
             
         }
+
+    while (true){
+        draw_line();
+        // Listening for TCP connections
+        
 
         // Accepting Clients TCP connection request
         sockaddr_in client_address;
@@ -63,7 +65,7 @@ int main(){
             std::cout << "Connection Accepted! " << std::endl;
             draw_line();
             std::thread t1(handle_client , client_socket);
-            t1.join();
+            
             // handle_client(client_socket);
         }
         
