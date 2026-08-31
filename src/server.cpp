@@ -65,7 +65,7 @@ int main(){
             std::cout << "Connection Accepted! " << std::endl;
             draw_line();
             std::thread t1(handle_client , client_socket);
-            
+            t1.detach();
             // handle_client(client_socket);
         }
         
