@@ -2,14 +2,17 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include "utils.h"
+#include "thread_handler.h"
 #include <cerrno>
 #include <cstring>
+#include <thread>
 
 
 
-int main() {
+
+int main(){
     int backlogs = 5; // For listening TCP connections. It is no. of devices which can wait in qeue before forming a connection.
-
+    
 
     draw_line();
     std::cout << "Netforge Initiating ... \n" << std::endl;
@@ -58,41 +61,17 @@ int main() {
             return 0;
         }else{
             std::cout << "Connection Accepted! " << std::endl;
-        }
-        draw_line();
-
-        // Sending message to client
-        std::string message = "Hello Client! ";
-        if(send(client_socket , message.c_str() , message.size() , 0) == -1){
-            std::cout << "Failed to send message" << std::endl;
+            draw_line();
+            std::thread t1(handle_client , client_socket);
+            t1.join();
+            // handle_client(client_socket);
         }
         
-
-        // Recieving message from client
-        while (true){
-            char c_message[1024];
-            int byte_received = recv(client_socket, c_message , sizeof(c_message) -1 , 0);
-            if (byte_received > 0){
-                c_message[byte_received] = '\0';
-                std::cout << "Client : " << c_message << std::endl;
-                std::string message = "Message Recieved by Server!";
-                if (send(client_socket , message.c_str() , message.size() , 0) == -1){
-                    std::cout << "Failed to send message" << std::endl;
-                    break;
-                }
-            }
-            else if(byte_received == 0){
-                std::cout << "Client closed its connection." << std::endl;
-                break;
-            }
-            else{
-                std::cout << "Error : " << strerror(errno) << std::endl;
-                break;
-            }
-        }
     }
-
-    draw_line(2);         
+    draw_line(2);
+    
+    
     return 0;
+
 }
 

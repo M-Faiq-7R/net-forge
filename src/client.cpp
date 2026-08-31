@@ -58,7 +58,7 @@ int main(){
             continue;
         }
         else{
-            if (c_message == "quit"){
+            if (c_message == "exit"){
                 std::cout << "Exiting this application" << std::endl;
                 break;
             }else{
