@@ -39,7 +39,7 @@ void handle_client(int client_socket){
             }
             else if(byte_received == 0){
                 std::cout << "Client closed its connection." << std::endl;
-                remove_client_socket(client_socket , connected_sockets);
+                remove_client_socket(client_socket , connected_sockets);        // Removing Disconnected Clients
                 break;
             }
             else{
