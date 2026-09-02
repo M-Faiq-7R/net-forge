@@ -10,10 +10,10 @@
 std::vector<int> connected_sockets;  // Vector list created to keep record of all connected sockets.
 std::mutex my_mutex ;
 
-void remove_client_socket(int client_socket , std::vector<int> connected_client_sockets){
-    auto it = std::find(connected_client_sockets.begin(), connected_client_sockets.end() , client_socket);   // this will move through whole vector and then {it} will be the index of desired number
-    if (it != connected_client_sockets.end()){
-        connected_client_sockets.erase(it);
+void remove_client_socket(int client_socket){
+    auto it = std::find(connected_sockets.begin(), connected_sockets.end() , client_socket);   // this will move through whole vector and then {it} will be the index of desired number
+    if (it != connected_sockets.end()){
+        connected_sockets.erase(it);
     }
 }
 
@@ -47,7 +47,7 @@ void handle_client(int client_socket){
                 std::cout << "Client closed its connection." << std::endl;
                 {   // This block only allows one thread to access and modify this vector at a time to avoid race condition
                     std::lock_guard<std::mutex> lock(my_mutex);
-                    remove_client_socket(client_socket , connected_sockets);        // Removing Disconnected Clients 
+                    remove_client_socket(client_socket );        // Removing Disconnected Clients 
                 }
                 break;
             }
