@@ -50,14 +50,14 @@ The exact feature set will evolve during development, but the project may eventu
 
 Phase 3: Multiple Clients
 
-✅ Task 1 — Server accepts clients repeatedly
-✅ Task 2 — Handle clients concurrently
-⬜ Task 3 — Properly manage client threads
-⬜ Task 4 — Maintain a client list
-⬜ Task 5 — Broadcast messages
-⬜ Task 6 — Thread safety / mutexes
-⬜ Task 7 — Clean client disconnection
-⬜ Task 8 — Test the whole system
+* ✅ Task 1 — Server accepts clients repeatedly
+* ✅ Task 2 — Handle clients concurrently
+* ⬜ Task 3 — Properly manage client threads
+* ⬜ Task 4 — Maintain a client list
+* ⬜ Task 5 — Broadcast messages
+* ⬜ Task 6 — Thread safety / mutexes
+* ⬜ Task 7 — Clean client disconnection
+* ⬜ Task 8 — Test the whole system
 
 ## Building
 
