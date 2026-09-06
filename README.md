@@ -64,7 +64,7 @@ Phase 3: Multiple Clients
 Compile the project using `g++`:
 
 ```bash
-g++ src/server.cpp src/utils.cpp -o server
+g++ src/server.cpp src/utils.cpp src/thread_handler -o server
 ```
 ```bash
 g++ src/client.cpp -o client
