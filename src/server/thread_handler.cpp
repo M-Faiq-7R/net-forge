@@ -17,12 +17,19 @@ void remove_client_socket(int client_socket){
     }
 }
 
+void print_vector(std::vector<int> nigga){
+    for(int i = 0; i <= nigga.size() ; i++){
+                        std::cout << i << "-----" ; 
+                    }
+}
+
 void handle_client(int client_socket){
     // Sending message to client
         std::string message = "Hello Client! ";
         {   // This block only allows one thread to access and modify this vector at a time to avoid race condition
             std::lock_guard<std::mutex> lock(my_mutex);
             connected_sockets.push_back(client_socket);   // Append Client socket at the end of the vector
+            print_vector(connected_sockets);     // print connected_sockets after connection is established 
         }
         if(send(client_socket , message.c_str() , message.size() , 0) == -1){
             std::cout << "Failed to send message" << std::endl;
@@ -48,6 +55,7 @@ void handle_client(int client_socket){
                 {   // This block only allows one thread to access and modify this vector at a time to avoid race condition
                     std::lock_guard<std::mutex> lock(my_mutex);
                     remove_client_socket(client_socket );        // Removing Disconnected Clients 
+                    print_vector(connected_sockets);     // print connected_sockets after removal
                 }
                 break;
             }
@@ -57,6 +65,7 @@ void handle_client(int client_socket){
             }
         }
 }
+
 
 
 
