@@ -1,6 +1,7 @@
 #include <iostream>
 #include "thread_handler.h"
 #include "utils.h"
+#include "broadcast.h"
 #include <thread>
 #include <cstring>
 #include <netinet/in.h>
@@ -18,7 +19,7 @@ void remove_client_socket(int client_socket){
     }
 }
 
-void print_vector(std::vector<int> nigga){
+void print_vector(std::vector<int> nigga){                                    // Optional function ; just for testing purposes
     for(int i = 0; i <= nigga.size() ; i++){
                         std::cout << i << "-----" ; 
                     }
@@ -47,6 +48,7 @@ void handle_client(int client_socket){
                 c_message[byte_received] = '\0';
                 std::cout << "Client : " << c_message << std::endl;
                 std::string message = "Message Recieved by Server!";
+                broadcast_message(client_socket , c_message , connected_sockets);       // Broadcast Message to other clients ; Sends data to broadcast.cpp to process
                 if (send(client_socket , message.c_str() , message.size() , 0) == -1){
                     std::cout << "Failed to send message" << std::endl;
                     break;

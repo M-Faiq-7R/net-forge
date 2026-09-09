@@ -8,8 +8,8 @@
 #include <cstring>
 #include <thread>
 
-int initialize_server(){
-    int backlogs = 5; // For listening TCP connections. It is no. of devices which can wait in qeue before forming a connection.
+int initialize_server(int max_tcp_connections){
+    int backlogs = max_tcp_connections; // For listening TCP connections. It is no. of devices which can wait in qeue before forming a connection.
     
     draw_line(2);
     std::cout << "Netforge Initiating ... \n" << std::endl;
@@ -47,3 +47,4 @@ int initialize_server(){
             return 0;
         }
 }
+
