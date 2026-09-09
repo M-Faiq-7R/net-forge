@@ -1,53 +1,18 @@
 #include <iostream>
 #include <sys/socket.h>
 #include <netinet/in.h>
-#include "utils.h"
-#include "thread_handler.h"
 #include <cerrno>
 #include <cstring>
 #include <thread>
+#include "startup.h"
+#include "thread_handler.h"
+#include "utils.h"
 
 
 
 
 int main(){
-    int backlogs = 5; // For listening TCP connections. It is no. of devices which can wait in qeue before forming a connection.
-    
-
-    draw_line();
-    std::cout << "Netforge Initiating ... \n" << std::endl;
-    draw_line(2);
-
-    // Creating a socket
-    int server_socket = socket(AF_INET, SOCK_STREAM, 0);
-    std::cout << "Socket created successfully -> " << server_socket << std::endl;
-    
-    // Additional socket info
-    sockaddr_in server_address;
-    server_address.sin_family = AF_INET;
-    server_address.sin_port = htons(8080);
-    server_address.sin_addr.s_addr = INADDR_ANY ;
-
-    std::cout << "Socket info := " << std::endl;
-    std::cout << "Socket family :: " << server_address.sin_family << std::endl;
-    std::cout << "Socket port :: " << server_address.sin_port << std::endl      
-              << "Socket address :: " << server_address.sin_addr.s_addr << std::endl;
-
-    // Binding the socket
-    if (bind(server_socket, (struct sockaddr*)&server_address , sizeof(server_address))==0){
-        std::cout << "Bind Created Successfully." << std::endl;
-    }else{
-        std::cout << "Failed to create Bind." << std::endl;
-        std::cout << "Error : " << strerror(errno) << std::endl;
-        return 0;
-    }
-
-    if(listen(server_socket , backlogs) == 0){                                       // Listen doesn't actually communicates with client , instead it just waits for user request to form connection , we use accept() to form connection with client-server.
-            std::cout << "Server listening ..." << std::endl;
-        }else{
-            std::cout << "Server Failed to listen ... " << std::endl;
-            
-        }
+    int server_socket = initialize_server();
 
     while (true){
         draw_line();
@@ -66,7 +31,7 @@ int main(){
             draw_line();
             std::thread t1(handle_client , client_socket);
             t1.detach();
-            // handle_client(client_socket);
+        
         }
         
     }

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 #include "utils.h"
 
 void draw_line(int i){
@@ -12,3 +13,4 @@ void draw_x_line(int i){
         std::cout << "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" << std::endl;
     }
 }
+

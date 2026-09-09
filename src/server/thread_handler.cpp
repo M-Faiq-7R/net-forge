@@ -1,5 +1,6 @@
 #include <iostream>
 #include "thread_handler.h"
+#include "utils.h"
 #include <thread>
 #include <cstring>
 #include <netinet/in.h>
@@ -22,6 +23,7 @@ void print_vector(std::vector<int> nigga){
                         std::cout << i << "-----" ; 
                     }
 }
+
 
 void handle_client(int client_socket){
     // Sending message to client
