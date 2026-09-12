@@ -1,5 +1,6 @@
 #include <iostream>
 #include "startup.h"
+#include "broadcast.h"
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
@@ -27,7 +28,7 @@ int main(){
                     std::cout << "Failed to send message to server " << std::endl;
                     break;
                 }else{
-
+                    broadcast_message(client_socket);
                 }
             }
 
