@@ -9,10 +9,8 @@
 #include "utils.h"
 
 
-
-
 int main(){
-    int server_socket = initialize_server();
+    int server_socket = initialize_server(); // It will initialzie server with default 5
 
     while (true){
         draw_line();
