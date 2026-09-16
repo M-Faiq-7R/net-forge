@@ -7,6 +7,9 @@
 #include <string>
 #include <cerrno>
 #include <cstring>
+#include <thread>
+#include "client_operation_manager.h"
+
 
 int main(){
     int client_socket =initialize_client();
@@ -28,21 +31,10 @@ int main(){
                     std::cout << "Failed to send message to server " << std::endl;
                     break;
                 }else{
-                    broadcast_message(client_socket);
+                    send_data(client_socket);
                 }
             }
-
-            char confirmation_message[1024];
-            int byte_received_r = recv(client_socket, confirmation_message , sizeof(confirmation_message) -1 , 0);
-            if (byte_received_r > 0){
-                confirmation_message[byte_received_r] = '\0';
-                std::cout << "Server : " << confirmation_message << std::endl;
-            }else if(byte_received_r == 0){
-                std::cout << "Server closed its connection." << std::endl;
-            }else{
-                std::cout << "Error : " << strerror(errno) << std::endl;
-                return 0;
-            }
+            rcv_data(client_socket);
         }
     }
     return 0;
