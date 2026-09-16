@@ -28,3 +28,27 @@ void send_data(int client_socket){
             }
         }
 }
+
+void handle_client_input(int client_socket){
+    while (true){
+        std::string c_message;
+        std::cout << "> ";
+        std::getline(std::cin , c_message);
+        if (c_message.empty()){
+            continue;
+        }
+        else{
+            if (c_message == "exit"){
+                std::cout << "Exiting this application" << std::endl;
+                break;
+            }else{
+                if(send(client_socket , c_message.c_str() , c_message.size() , 0) == -1){
+                    std::cout << "Failed to send message to server " << std::endl;
+                    break;
+                }else{
+                    send_data(client_socket);
+                }
+            }
+        }
+}
+}
