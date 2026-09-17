@@ -18,7 +18,7 @@ std::string get_time(){
 
 void log_info(int socket, std::string info){
     std::string timestamp = get_time();
-    std::ofstream file("system.log" , std::ios::app);
+    std::ofstream file("data/system.log" , std::ios::app);
     file << '[' << timestamp << "]  " << info << "  | Socket : " << socket << std::endl;
     file.close();
 }
