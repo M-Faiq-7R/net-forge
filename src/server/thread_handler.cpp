@@ -2,6 +2,7 @@
 #include "thread_handler.h"
 #include "utils.h"
 #include "broadcast.h"
+#include "logger.h"
 #include <thread>
 #include <cstring>
 #include <netinet/in.h>
@@ -32,7 +33,6 @@ void handle_client(int client_socket){
         {   // This block only allows one thread to access and modify this vector at a time to avoid race condition
             std::lock_guard<std::mutex> lock(my_mutex);
             connected_sockets.push_back(client_socket);   // Append Client socket at the end of the vector
-            print_vector(connected_sockets);     // print connected_sockets after connection is established 
         }
         if(send(client_socket , message.c_str() , message.size() , 0) == -1){
             std::cout << "Failed to send message" << std::endl;
@@ -53,18 +53,20 @@ void handle_client(int client_socket){
                     std::cout << "Failed to send message" << std::endl;
                     break;
                 }
+                log_info(client_socket, "Message Broadcasted! ");
             }
             else if(byte_received == 0){
                 std::cout << "Client closed its connection." << std::endl;
                 {   // This block only allows one thread to access and modify this vector at a time to avoid race condition
                     std::lock_guard<std::mutex> lock(my_mutex);
                     remove_client_socket(client_socket );        // Removing Disconnected Clients 
-                    print_vector(connected_sockets);     // print connected_sockets after removal
+                    log_info(client_socket, "Connection Removed ! ");
                 }
                 break;
             }
             else{
                 std::cout << "Error : " << strerror(errno) << std::endl;
+                log_info(client_socket, "Connection Removed ! ");
                 break;
             }
         }
