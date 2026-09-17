@@ -27,7 +27,7 @@ int main(){
             return 0;
         }else{
             std::cout << "Connection Accepted! " << std::endl;
-            log_info(client_socket, "Connection Accepted ! ");
+            log_info(client_socket, "Connection Accepted! ");
             draw_line();
             std::thread t1(handle_client , client_socket);
             t1.detach();
