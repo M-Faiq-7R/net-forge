@@ -37,27 +37,26 @@ The exact feature set will evolve during development, but the project may eventu
 
 * ✅ Basic TCP client
 * ✅ Basic TCP server
-* [ ] UDP communication
-* [ ] IP and port handling
-* [ ] Connection management
-* [ ] Packet/data inspection
-* [ ] Network diagnostics
-* [ ] Custom networking utilities
-* [ ] Logging and debugging
-* [ ] More advanced networking functionality
+* ⬜ UDP communication
+* ✅ IP and port handling
+* ✅ Connection management
+* ⬜ Packet/data inspection
+* ⬜ Network diagnostics
+* ⬜ Custom networking utilities
+* 🔄 Logging and debugging
+* ⬜ More advanced networking functionalitys
 
 ## Current Progress
+Phase 4: Client Management & Logging
 
-Phase 3: Multiple Clients
-
-* ✅ Task 1 — Server accepts clients repeatedly
-* ✅ Task 2 — Handle clients concurrently
-* ✅ Task 3 — Properly manage client threads
-* ✅ Task 4 — Maintain a client list
-* ✅ Task 5 — Broadcast messages
-* ✅ Task 6 — Thread safety / mutexes
-* ✅ Task 7 — Clean client disconnection
-* ✅ Task 8 — Test the whole system
+* ⬜ Task 1 — Create a dedicated client information structure
+* ⬜ Task 2 — Track connected clients with IP address and port
+* ⬜ Task 3 — Record client connection timestamps
+* ⬜ Task 4 — Implement server event logging
+* ⬜ Task 5 — Log client connections and disconnections
+* ⬜ Task 6 — Keep client state and logs thread-safe
+* ⬜ Task 7 — Verify logs and client tracking with multiple clients
+* ⬜ Task 8 — Test the complete client management system
 
 ## Installing System
 
