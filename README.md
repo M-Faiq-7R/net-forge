@@ -59,13 +59,25 @@ Phase 3: Multiple Clients
 * ✅ Task 7 — Clean client disconnection
 * ✅ Task 8 — Test the whole system
 
+## Installing System
+
+```bash
+git clone https://github.com/M-Faiq-7R/net-forge.git
+cd net-forge
+```
+
 ## Building
 
 Compile the project using `g++`:
 
+For Server: 
+
 ```bash
 g++ src/server/*.cpp -o server
 ```
+
+For Client: 
+
 ```bash
 g++ src/client/*.cpp -o client
 ```
