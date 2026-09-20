@@ -2,20 +2,35 @@
 
 ## Supported Versions
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
+NetForge is currently under active development and does not have
+official release versions yet.
 
-| Version | Supported          |
-| ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
+Security fixes will generally be applied to the latest version
+available on the `main` branch.
+
+| Version | Supported |
+| ------- | --------- |
+| `main` | ✅ |
+| Older commits/releases | ❌ |
 
 ## Reporting a Vulnerability
 
-Use this section to tell people how to report a vulnerability.
+If you discover a security vulnerability in NetForge, please report it
+responsibly.
 
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+You can report vulnerabilities by opening a GitHub issue:
+
+https://github.com/M-Faiq-7R/net-forge/issues
+
+Please include:
+
+- A clear description of the vulnerability
+- Steps to reproduce it
+- The potential impact
+- Any relevant logs or code references
+
+For vulnerabilities that could expose sensitive information or require
+private disclosure, please contact the repository owner directly
+through GitHub rather than publicly disclosing the details.
+
+As this is an educational project, response times may vary.
