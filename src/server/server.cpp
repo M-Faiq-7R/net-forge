@@ -8,11 +8,11 @@
 #include "thread_handler.h"
 #include "utils.h"
 #include "logger.h"
-
+#include "client_manager.h"
 
 int main(){
     int server_socket = initialize_server(); // It will initialzie server with default 5
-
+    
     while (true){
         draw_line();
         // Listening for TCP connections
@@ -26,12 +26,13 @@ int main(){
             std::cout << "Failed to connect to client " << std::endl;
             return 0;
         }else{
+            make_client_details(client_socket, client_address);
             std::cout << "Connection Accepted! " << std::endl;
             log_info(client_socket, "Connection Accepted! ");
             draw_line();
             std::thread t1(handle_client , client_socket);
             t1.detach();
-        
+    
         }
         
     }

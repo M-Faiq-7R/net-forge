@@ -9,6 +9,7 @@
 #include <vector>
 #include <algorithm>
 #include <mutex>                 // Library added to use lockguard funtion
+#include "client_manager.h"
 
 std::vector<int> connected_sockets;  // Vector list created to keep record of all connected sockets.
 std::mutex my_mutex ;
@@ -17,6 +18,7 @@ void remove_client_socket(int client_socket){
     auto it = std::find(connected_sockets.begin(), connected_sockets.end() , client_socket);   // this will move through whole vector and then {it} will be the index of desired number
     if (it != connected_sockets.end()){
         connected_sockets.erase(it);
+        cManage(ClientAction::Remove);        // Sends data to client_manager.cpp
     }
 }
 
@@ -33,6 +35,7 @@ void handle_client(int client_socket){
         {   // This block only allows one thread to access and modify this vector at a time to avoid race condition
             std::lock_guard<std::mutex> lock(my_mutex);
             connected_sockets.push_back(client_socket);   // Append Client socket at the end of the vector
+            cManage(ClientAction::Add);
         }
         if(send(client_socket , message.c_str() , message.size() , 0) == -1){
             std::cout << "Failed to send message" << std::endl;
@@ -66,6 +69,7 @@ void handle_client(int client_socket){
             }
             else{
                 std::cout << "Error : " << strerror(errno) << std::endl;
+                remove_client_socket(client_socket );
                 log_info(client_socket, "Connection Removed ! ");
                 break;
             }
