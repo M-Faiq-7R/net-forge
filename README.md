@@ -14,20 +14,21 @@
 * Synchronization
 * Low-level Linux networking
 
-The project was built incrementally, starting from a basic TCP client and server and evolving into a multi-client network application.
+The project was built incrementally, starting from a basic TCP client and server and progressing toward a multi-client network application.
 
-The primary goal was **not** to build a production-ready networking framework, but to understand how networking concepts actually work by implementing them directly in C++.
+The primary goal was **not** to build a production-ready networking framework, but to understand how networking concepts work by implementing them directly in C++.
 
 ---
 
 ## 🚀 Features
+
+### Completed
 
 * ✅ TCP client-server communication
 * ✅ Multiple simultaneous client connections
 * ✅ Concurrent client handling using C++ threads
 * ✅ Dynamic message exchange between clients and server
 * ✅ Server responses to clients
-* ✅ Broadcasting messages between connected clients
 * ✅ Client connection and disconnection handling
 * ✅ Thread-safe management of connected clients
 * ✅ Mutex-based synchronization for shared client data
@@ -48,13 +49,12 @@ NetForge
 ├── Client
 │   ├── Establishes TCP connection
 │   ├── Sends messages
-│   └── Receives broadcast messages
+│   └── Handles server responses
 │
 └── Server
     ├── Accepts client connections
     ├── Creates a thread for each client
     ├── Manages connected clients
-    ├── Broadcasts messages
     ├── Handles disconnections
     └── Logs server events
 ```
@@ -102,11 +102,7 @@ Open another terminal and run:
 ./client
 ```
 
-You can launch multiple clients from separate terminals to test simultaneous connections and message broadcasting.
-
----
-
-## 🧪 Example
+You can launch multiple clients from separate terminals to test simultaneous connections.
 
 ```bash
 # Terminal 1
@@ -119,16 +115,6 @@ You can launch multiple clients from separate terminals to test simultaneous con
 ./client
 ```
 
-Messages sent by one client can be broadcast to the other connected clients through the server.
-
----
-
-## 🎯 Project Goal
-
-NetForge is primarily a **learning project** focused on understanding networking from the ground up.
-
-Instead of relying on high-level networking libraries, the project works directly with Linux's **POSIX socket API**, C++ threads, mutexes, and low-level networking primitives.
-
 ---
 
 ## 📚 Concepts Explored
@@ -137,20 +123,13 @@ Instead of relying on high-level networking libraries, the project works directl
 TCP/IP
   │
   ├── Socket Programming
-  │
   ├── Client / Server Architecture
-  │
   ├── Concurrent Connections
-  │
   ├── Multithreading
-  │
   ├── Mutex Synchronization
-  │
   ├── Shared Client State
-  │
-  ├── Message Broadcasting
-  │
-  └── Connection Management
+  ├── Connection Management
+  └── Graceful Disconnection
 ```
 
 ---
@@ -167,4 +146,38 @@ Built and tested on **Linux** using:
 * `g++`
 
 ---
+
+## 📈 Development Progress
+
+### Phase 1 — Basic TCP Communication
+
+* ✅ TCP socket creation
+* ✅ Client-server connection
+* ✅ Message exchange
+* ✅ Server responses
+* ✅ Basic disconnection
+
+### Phase 2 — Dynamic Communication
+
+* ✅ Dynamic client messages
+* ✅ Server-side message handling
+* ✅ Client-side responses
+* ✅ Improved connection handling
+
+### Phase 3 — Concurrent Client Handling
+
+* ✅ Multiple client connections
+* ✅ Dedicated threads for clients
+* ✅ Shared client tracking
+* ✅ Mutex-based synchronization
+* ✅ Client disconnection handling
+* ✅ Timestamped server events
+* ✅ Thread lifecycle management
+
+---
+
+## 🎯 Project Status
+
+NetForge was developed as a hands-on learning project to understand C++ networking, Linux socket programming, multithreading, and synchronization at a lower level.
+
 
