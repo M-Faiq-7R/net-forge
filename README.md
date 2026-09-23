@@ -1,28 +1,20 @@
 # ⚡ NetForge
 
-> A C++ networking project built from scratch on Linux to explore how computer networks work at a lower level.
+> A C++ networking project built from scratch on Linux to explore computer networking at a lower level.
 
 ---
 
 ## 🧠 About
 
-**NetForge** is a hands-on C++ networking project focused on:
+**NetForge** is a hands-on C++ networking project focused on TCP sockets, concurrent clients, multithreading, synchronization, and Linux socket programming.
 
-* TCP sockets
-* Concurrent clients
-* Multithreading
-* Synchronization
-* Low-level Linux networking
+The project was built incrementally from a basic TCP client-server application into a multi-client network application.
 
-The project was built incrementally, starting from a basic TCP client and server and progressing toward a multi-client network application.
-
-The primary goal was **not** to build a production-ready networking framework, but to understand how networking concepts work by implementing them directly in C++.
+The goal was not to create a production-ready networking framework, but to understand how networking concepts work by implementing them directly in C++ using the Linux socket API.
 
 ---
 
 ## 🚀 Features
-
-### Completed
 
 * ✅ TCP client-server communication
 * ✅ Multiple simultaneous client connections
@@ -33,7 +25,7 @@ The primary goal was **not** to build a production-ready networking framework, b
 * ✅ Thread-safe management of connected clients
 * ✅ Mutex-based synchronization for shared client data
 * ✅ Graceful client termination
-* ✅ Server-side logging
+* ✅ Server-side event logging
 * ✅ Timestamped server events
 * ✅ Linux socket programming using the POSIX socket API
 
@@ -41,7 +33,7 @@ The primary goal was **not** to build a production-ready networking framework, b
 
 ## 🏗️ Architecture
 
-The project is separated into components with different responsibilities:
+The project is organized into separate client and server components:
 
 ```text
 NetForge
@@ -49,13 +41,13 @@ NetForge
 ├── Client
 │   ├── Establishes TCP connection
 │   ├── Sends messages
-│   └── Handles server responses
+│   └── Receives server responses
 │
 └── Server
     ├── Accepts client connections
     ├── Creates a thread for each client
-    ├── Manages connected clients
-    ├── Handles disconnections
+    ├── Tracks connected clients
+    ├── Handles client disconnections
     └── Logs server events
 ```
 
@@ -63,20 +55,20 @@ NetForge
 
 ## 🛠️ Building
 
-### 1. Clone the repository
+### Clone the repository
 
 ```bash
 git clone https://github.com/M-Faiq-7R/net-forge.git
 cd net-forge
 ```
 
-### 2. Compile the server
+### Compile the server
 
 ```bash
 g++ src/server/*.cpp -o server
 ```
 
-### 3. Compile the client
+### Compile the client
 
 ```bash
 g++ src/client/*.cpp -o client
@@ -86,23 +78,19 @@ g++ src/client/*.cpp -o client
 
 ## ▶️ Running
 
-### Start the server
-
-Open a terminal and run:
+Start the server:
 
 ```bash
 ./server
 ```
 
-### Start the client
-
-Open another terminal and run:
+Then open another terminal and start a client:
 
 ```bash
 ./client
 ```
 
-You can launch multiple clients from separate terminals to test simultaneous connections.
+Multiple clients can be launched from separate terminals to test simultaneous connections:
 
 ```bash
 # Terminal 1
@@ -124,6 +112,8 @@ TCP/IP
   │
   ├── Socket Programming
   ├── Client / Server Architecture
+  ├── IPv4 Addressing
+  ├── TCP Connections
   ├── Concurrent Connections
   ├── Multithreading
   ├── Mutex Synchronization
@@ -134,50 +124,28 @@ TCP/IP
 
 ---
 
-## 🐧 Platform
+## 🧰 Technologies
 
-Built and tested on **Linux** using:
-
-* C++
-* POSIX Sockets
-* TCP/IP
-* `std::thread`
-* `std::mutex`
-* `g++`
-
----
-
-## 📈 Development Progress
-
-### Phase 1 — Basic TCP Communication
-
-* ✅ TCP socket creation
-* ✅ Client-server connection
-* ✅ Message exchange
-* ✅ Server responses
-* ✅ Basic disconnection
-
-### Phase 2 — Dynamic Communication
-
-* ✅ Dynamic client messages
-* ✅ Server-side message handling
-* ✅ Client-side responses
-* ✅ Improved connection handling
-
-### Phase 3 — Concurrent Client Handling
-
-* ✅ Multiple client connections
-* ✅ Dedicated threads for clients
-* ✅ Shared client tracking
-* ✅ Mutex-based synchronization
-* ✅ Client disconnection handling
-* ✅ Timestamped server events
-* ✅ Thread lifecycle management
+* **C++**
+* **Linux**
+* **POSIX Socket API**
+* **TCP/IP**
+* **IPv4**
+* **std::thread**
+* **std::mutex**
+* **g++**
 
 ---
 
-## 🎯 Project Status
+## 🎯 Project Outcome
 
-NetForge was developed as a hands-on learning project to understand C++ networking, Linux socket programming, multithreading, and synchronization at a lower level.
+NetForge was completed as a hands-on learning project focused on understanding:
 
+* How TCP client-server communication works
+* How Linux sockets are created and managed
+* How multiple clients can be handled concurrently
+* How threads interact with shared data
+* Why synchronization is necessary in concurrent programs
+* How client connections and disconnections are managed
 
+The project provided practical experience with **C++ networking, Linux, multithreading, and synchronization** at a lower level.
