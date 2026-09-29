@@ -23,3 +23,7 @@ void log_info(int socket, std::string info){
     file.close();
 }
 
+void log_info(std::unordered_map<int , Client_Info> info){
+    std::ofstream file("data/user_detail.log");
+}
+
